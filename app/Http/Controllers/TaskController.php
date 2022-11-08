@@ -51,8 +51,9 @@ class TaskController extends Controller
     }
     public function search(Request $request)
     {
-        dd('asdasd');
-        // $task = Task::destroy($id);
-        return redirect('tasks')->with('success','delete oke :D');
+        $dataSearch = $request->all();
+        $task = Task::where('name','LIKE','%'.$dataSearch['search'].'%')
+        ->get();
+        return view('tasks.index')->with('tasks',$task);
     }
 }
